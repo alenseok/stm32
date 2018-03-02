@@ -134,11 +134,16 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  printf("Test LED\n\r");
   while (1)
   {
 
+#if 1
   	HAL_Delay(500);
 	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_14);
+	PRINTF1("F1 Tick %d\n", HAL_GetTick());
+	PRINTF2("F2 Tick %d\n", HAL_GetTick());
+#endif
 	
 #if 0
   	HAL_Delay(1000);
@@ -146,23 +151,26 @@ int main(void)
 	printf("test printf\n");
 
 	HAL_Delay(1000);
-	PRINTF("test PRINTF\n");
+	PRINTF1("test PRINTF\n");
 
 	HAL_Delay(1000);
-	PRINTF("Tick %d\n", HAL_GetTick());
+	PRINTF1("Tick %d\n", HAL_GetTick());
 
-	PRINTF("\n");
+	PRINTF1("\n");
 #endif
 #if 0
-	vcom1_Send(DataSend, 12);
+	//vcom1_Send(DataSend, 12);
+	puts1(DataSend, 12);
 #endif
 #if 0
 	msg = "test vcom1 send\n\r";
-	vcom1_Send(msg, strlen(msg));
+	//vcom1_Send(msg, strlen(msg));
+	puts1(msg, strlen(msg));
 #endif
 #if 0
 	msg = "test vcom2 send\n\r";
-	vcom2_Send(msg, strlen(msg));
+	//vcom2_Send(msg, strlen(msg));
+	puts2(msg, strlen(msg));
 #endif
 
 #if 0		

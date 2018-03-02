@@ -89,9 +89,9 @@ PUTCHAR_PROTOTYPE
 }
 
 /*
-	for PRINTF(...)
+	for PRINTF1(...)
 */
-void vcom_Send( char *format, ... )
+void vcom_Send1( char *format, ... )
 {
 	va_list args;
 	va_start(args, format);
@@ -111,8 +111,33 @@ void vcom_Send( char *format, ... )
 	va_end(args);
 }
 
+/*
+	for PRINTF2(...)
+*/
+void vcom_Send2( char *format, ... )
+{
+	va_list args;
+	va_start(args, format);
 
-void vcom1_Send(uint8_t *pData, uint16_t Size)
+	/*convert into string at buff[0] of length iw*/
+	iw = vsprintf(&buff[0], format, args);
+
+	if(buff[iw-1] == '\n')
+	{
+		buff[iw] = '\r';
+		iw++;
+	}
+
+	//HAL_UART_Transmit(&huart1,(uint8_t *)&buff[0], iw, 0xFFFF);
+	HAL_UART_Transmit(&huart2,(uint8_t *)&buff[0], iw, 300);
+
+	va_end(args);
+}
+
+
+
+//void vcom1_Send(uint8_t *pData, uint16_t Size)
+void puts1(uint8_t *pData, uint16_t Size)
 {
 	uint8_t send;
 	uint16_t sz;
@@ -127,7 +152,8 @@ void vcom1_Send(uint8_t *pData, uint16_t Size)
 	}
 }
 
-void vcom2_Send(uint8_t *pData, uint16_t Size)
+//void vcom2_Send(uint8_t *pData, uint16_t Size)
+void puts2(uint8_t *pData, uint16_t Size)
 {
 	uint8_t send;
 	uint16_t sz;

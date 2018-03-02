@@ -97,14 +97,20 @@ extern UART_HandleTypeDef huart2;
 /*
 	for PRINTF(...)
 */
-void vcom_Send( char *format, ... );
+void vcom_Send1( char *format, ... );
+void vcom_Send2( char *format, ... );
 
-#define PRINTF(...)     vcom_Send(__VA_ARGS__)
+#define PRINTF1(...)     vcom_Send1(__VA_ARGS__)
+#define PRINTF2(...)     vcom_Send2(__VA_ARGS__)
 
 
 
-void vcom1_Send(uint8_t *pData, uint16_t Size);
-void vcom2_Send(uint8_t *pData, uint16_t Size);
+
+//void vcom1_Send(uint8_t *pData, uint16_t Size);
+//void vcom2_Send(uint8_t *pData, uint16_t Size);
+void puts1(uint8_t *pData, uint16_t Size);
+void puts2(uint8_t *pData, uint16_t Size);
+
 
 
 
